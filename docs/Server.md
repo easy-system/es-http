@@ -29,7 +29,7 @@ $server->setRequest($request->withAttribute('foo', 'bar');
 ## If the package is used standalone
 
 ```
-$server = new \Es\Server\Server();
+$server = new \Es\Http\Server();
 ```
 
 ## If the package is used as component of System
