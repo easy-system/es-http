@@ -10,12 +10,19 @@ the server has a method to obtain an instance of the request and response:
 $response = $server->getResponse();
 return $response->withSatatus(404);
 ```
-
-Otherwise, the server can be a central repository for the current instance of 
-the response or request:
+```
+$request = $server->getRequest();
+return $request->withAttribut('foo', 'bar');
+```
+Otherwise, the server can be used as a central repository for the current
+instance of the response or request:
 ```
 $response = $server->getResponse();
 $server->setResponse($response->withStatus(404));
+```
+```
+$request = $server->getRequest();
+$server->setRequest($request->withAttribute('foo', 'bar');
 ```
 
 # Obtaining server instance
@@ -32,3 +39,9 @@ $server = new \Es\Server\Server();
 $server = $services->get('Server');
 ```
  
+# Sending HTTP response
+```
+$response = $server->getResponse();
+$emitter  = $server->getEmitter();
+$emitter->emit($response);
+```
