@@ -68,3 +68,34 @@ foreach ($files['foo'] as $uploadedFile) {
     }
 }
 ```
+
+# The default upload strategy
+
+The class `Es\Http\Uploading\DefaultUploadStrategy` extends the strategies queue
+class and adds from constructor two strategies:
+
+- `Es\Http\Uploading\DirectoryStrategy` - creates specified directory, if it 
+  not exists
+- `Es\Http\Uploading\MoveStrategy` - moves uploaded file to specified directory
+
+Since the class extends the strategies queue, you can add to this queue their 
+own strategies:
+```
+$defaultStrategy = new \Es\Http\Uploading\DefaultUploadStrategy();
+$myStrategy      = new \My\Uploading\Strategy();
+
+$defaultStrategy->attach($myStrategy, 300);
+
+foreach ($files['foo'] as $uploadedFile) {
+    if ($uploadedFile->getError()) {
+        continue;
+    }
+    $uploadedFile->setUploadStrategy($defaultStrategy);
+    $uploadedFile->moveTo($target);
+
+    if ($defaultStrategy->hasOperationError()) {
+        var_dump($defaultStrategy->getOperationError());
+        var_dump($defaultStrategy->getOperationErrorDescription());
+    }
+}
+```
