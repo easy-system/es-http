@@ -99,3 +99,38 @@ foreach ($files['foo'] as $uploadedFile) {
     }
 }
 ```
+
+# The strategies queue
+
+Ultimately you can create completely your own queue of strategies:
+```
+class MyUploadStrategyFactory
+{
+    public static function make()
+    {
+        $strategiesQueue  = new \Es\Http\Uploading\StrategiesQueue();
+        $myFirstStrategy  = new \My\Uploading\FirstStrategy();
+        $mySecondStrategy = new \My\Uploading\SecondStrategy();
+
+        $strategiesQueue->attach(myFirstStrategy,  200);
+        $strategiesQueue->attach(mySecondStrategy, 100);
+
+        return $strategiesQueue;
+    }
+}
+
+$strategy = MyUploadStrategyFactory::make();
+
+foreach ($files['foo'] as $uploadedFile) {
+    if ($uploadedFile->getError()) {
+        continue;
+    }
+    $uploadedFile->setUploadStrategy($strategy);
+    $uploadedFile->moveTo($target);
+
+    if ($strategy->hasOperationError()) {
+        var_dump($strategy->getOperationError());
+        var_dump($strategy->getOperationErrorDescription());
+    }
+}
+```
