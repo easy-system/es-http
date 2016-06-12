@@ -39,3 +39,32 @@ This behavior provided by default. To change or extend this behavior, see the
 uploading strategies.
 
 # The upload strategies
+
+The class `Es\Http\UploadedFile` contains two additional methods that are not 
+defined at this time in the `Psr\Http\Message\UploadedFileInterface` interface:
+
+- `setUploadStrategy()`
+- `getUploadStrategy()`
+
+These two methods allow you to change the upload behavior as you wish.
+When you call the method `moveTo($target)`, it uses the specified  upload strategy.
+If the strategy has not been specified, it uses the strategy by default 
+`Es\Http\Uploading\DefaultUploadStrategy`.
+
+To specify strategy for uploaded files:
+```
+$myStrategy = new \My\Uploading\Strategy();
+
+foreach ($files['foo'] as $uploadedFile) {
+    if ($uploadedFile->getError()) {
+        continue;
+    }
+    $uploadedFile->setUploadStrategy($myStrategy);
+    $uploadedFile->moveTo($target);
+
+    if ($myStrategy->hasOperationError()) {
+        var_dump($myStrategy->getOperationError());
+        var_dump($myStrategy->getOperationErrorDescription());
+    }
+}
+```
