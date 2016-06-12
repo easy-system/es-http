@@ -1,7 +1,7 @@
 Introduction
 ============
-The `Es\Http\ServerRequest` represents the incoming server-side HTTP request.
-It implements the 'Psr\Http\Message\ServerRequestInterface' interface.
+The class `Es\Http\ServerRequest` represents the incoming server-side HTTP request.
+It implements the `Psr\Http\Message\ServerRequestInterface` interface.
 
 The class `Es\Http\ServerRequest` provides additional methods that are not 
 defined at this time in the `Psr\Http\Message\ServerRequestInterface` interface:
@@ -14,7 +14,7 @@ defined at this time in the `Psr\Http\Message\ServerRequestInterface` interface:
 
 # Usage
 
-To get an instance of `Es\Http\ServerRequest`, use the `Es\Http\Server`:
+To get an instance of `Es\Http\ServerRequest` use the `Es\Http\Server`:
 ```
 $request = $server->getRequest();
 ```
