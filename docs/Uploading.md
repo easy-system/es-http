@@ -112,8 +112,8 @@ class MyUploadStrategyFactory
         $myFirstStrategy  = new \My\Uploading\FirstStrategy();
         $mySecondStrategy = new \My\Uploading\SecondStrategy();
 
-        $strategiesQueue->attach(myFirstStrategy,  200);
-        $strategiesQueue->attach(mySecondStrategy, 100);
+        $strategiesQueue->attach($myFirstStrategy,  200);
+        $strategiesQueue->attach($mySecondStrategy, 100);
 
         return $strategiesQueue;
     }
