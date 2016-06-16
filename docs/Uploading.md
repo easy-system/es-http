@@ -3,15 +3,13 @@ The basic usage
 
 Use the `Es\Http\ServerRequest` to get an uploaded files:
 ```
-$request = $server->getRequest();
-$files   = $request->getUploadedFiles();
+$files = $request->getUploadedFiles();
 ```
 The above example will return an array of instances of `Es\Http\UploadedFile`.
 
 A simple example of basic usage of the array with uploaded files:
 ```
-$request = $server->getRequest();
-$files   = $request->getUploadedFiles();
+$files = $request->getUploadedFiles();
 
 if (! isset($files['foo']) {
     return;

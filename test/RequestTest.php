@@ -196,13 +196,13 @@ class RequestTest extends \PHPUnit_Framework_TestCase
         $this->assertSame($new->getUri(), $uri);
     }
 
-    public function testWithUriChangeHostByDefault()
+    public function testWithUriChangeHostHeaderByDefault()
     {
         $request = new Request(null, ['Host' => ['foo.com']]);
 
-        $uri = new Uri('http://bar.org');
+        $uri = new Uri('http://bar.org:8080');
         $new = $request->withUri($uri);
-        $this->assertEquals(['bar.org'], $new->getHeader('Host'));
+        $this->assertEquals(['bar.org:8080'], $new->getHeader('Host'));
     }
 
     public function testWithUriPreserveHostWhenHostPresents()
