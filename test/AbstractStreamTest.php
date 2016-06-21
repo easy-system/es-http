@@ -218,7 +218,7 @@ class AbstractStreamTest extends \PHPUnit_Framework_TestCase
     {
         $content = 'Lorem ipsum dolor sit amet';
         $temp    = sys_get_temp_dir();
-        $path    = $temp . DIRECTORY_SEPARATOR . 'foo.bar';
+        $path    = $temp . PHP_DS . 'foo.bar';
         $fp      = fopen($path, 'w+b');
         fwrite($fp, $content);
         fclose($fp);

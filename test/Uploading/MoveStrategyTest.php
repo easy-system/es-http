@@ -24,7 +24,7 @@ class MoveStrategyTest extends \PHPUnit_Framework_TestCase
 
     public function setUp()
     {
-        $this->tempDir = sys_get_temp_dir() . DIRECTORY_SEPARATOR . 'es-http-test';
+        $this->tempDir = sys_get_temp_dir() . PHP_DS . 'es-http-test';
         if (file_exists($this->tempDir) && is_dir($this->tempDir)) {
             if (! is_writable($this->tempDir)) {
                 $this->fail(sprintf(
@@ -49,7 +49,7 @@ class MoveStrategyTest extends \PHPUnit_Framework_TestCase
             ));
         }
 
-        $this->tempFile = $this->tempDir . DIRECTORY_SEPARATOR . 'foo.bar';
+        $this->tempFile = $this->tempDir . PHP_DS . 'foo.bar';
         $fp = fopen($this->tempFile, 'w+b');
         fwrite($fp, self::UPLOADED_CONTENT);
         fclose($fp);
@@ -173,14 +173,14 @@ class MoveStrategyTest extends \PHPUnit_Framework_TestCase
         $target = new UploadTarget('moved.file');
         $strategy($file, $target);
         $this->assertFalse($strategy->hasOperationError());
-        $moved = $this->tempDir . DIRECTORY_SEPARATOR . 'moved.file';
+        $moved = $this->tempDir . PHP_DS . 'moved.file';
         $this->assertSame(file_get_contents($moved), self::UPLOADED_CONTENT);
     }
 
     public function testInvokeMoveOnFailure()
     {
         $strategy = new MoveStrategy();
-        $strategy->setTargetDirectory($this->tempDir . DIRECTORY_SEPARATOR . 'foo');
+        $strategy->setTargetDirectory($this->tempDir . PHP_DS . 'foo');
         $file   = new UploadedFile(null, $this->tempFile);
         $target = new UploadTarget('moved.file');
         $strategy($file, $target);

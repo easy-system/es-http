@@ -20,7 +20,7 @@ class DirectoryStrategyTest extends \PHPUnit_Framework_TestCase
 
     public function setUp()
     {
-        $this->tempDir = sys_get_temp_dir() . DIRECTORY_SEPARATOR . 'es-http-test';
+        $this->tempDir = sys_get_temp_dir() . PHP_DS . 'es-http-test';
         if (file_exists($this->tempDir) && is_dir($this->tempDir)) {
             if (! is_writable($this->tempDir)) {
                 $this->fail(sprintf(
@@ -145,11 +145,11 @@ class DirectoryStrategyTest extends \PHPUnit_Framework_TestCase
         if (substr(PHP_OS, 0, 3) == 'WIN') {
             $this->markTestSkipped('Not testable on windows.');
         }
-        $nonWritableDir = $this->tempDir . DIRECTORY_SEPARATOR . 'non-writable-dir';
+        $nonWritableDir = $this->tempDir . PHP_DS . 'non-writable-dir';
         if (! file_exists($nonWritableDir)) {
             mkdir($nonWritableDir, 0500, true);
         }
-        $targetDir = $nonWritableDir . DIRECTORY_SEPARATOR . 'target-dir';
+        $targetDir = $nonWritableDir . PHP_DS . 'target-dir';
 
         $strategy = new DirectoryStrategy();
         $strategy->setTargetDirectory($targetDir);
@@ -164,7 +164,7 @@ class DirectoryStrategyTest extends \PHPUnit_Framework_TestCase
         if (substr(PHP_OS, 0, 3) == 'WIN') {
             $this->markTestSkipped('Not testable on windows.');
         }
-        $nonWritableDir = $this->tempDir . DIRECTORY_SEPARATOR . 'non-writable-dir';
+        $nonWritableDir = $this->tempDir . PHP_DS . 'non-writable-dir';
         if (! file_exists($nonWritableDir)) {
             mkdir($nonWritableDir, 0500, true);
         }
@@ -181,7 +181,7 @@ class DirectoryStrategyTest extends \PHPUnit_Framework_TestCase
         if (substr(PHP_OS, 0, 3) == 'WIN') {
             $this->markTestSkipped('Not testable on windows.');
         }
-        $nonReadableDir = $this->tempDir . DIRECTORY_SEPARATOR . 'non-readable-dir';
+        $nonReadableDir = $this->tempDir . PHP_DS . 'non-readable-dir';
         if (! file_exists($nonReadableDir)) {
             mkdir($nonReadableDir, 0300, true);
         }
@@ -195,7 +195,7 @@ class DirectoryStrategyTest extends \PHPUnit_Framework_TestCase
 
     public function testInvokeOnSuccess()
     {
-        $targetDir = $this->tempDir . DIRECTORY_SEPARATOR . 'target-dir';
+        $targetDir = $this->tempDir . PHP_DS . 'target-dir';
         $strategy  = new DirectoryStrategy();
         $strategy->setTargetDirectory($targetDir);
         $file   = new UploadedFile();

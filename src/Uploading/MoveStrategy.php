@@ -179,7 +179,7 @@ class MoveStrategy extends AbstractUploadStrategy
 
             return;
         }
-        $destination = $dir . DIRECTORY_SEPARATOR . $target;
+        $destination = $dir . PHP_DS . $target;
         set_error_handler(function ($errno, $errstr) {
             throw new RuntimeException($errstr);
         });
