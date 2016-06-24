@@ -528,7 +528,7 @@ class Message implements MessageInterface
 
             $item = trim($item);
 
-            if (! $item) {
+            if ('' === $item) {
                 throw new InvalidArgumentException(
                     'Empty header value provided.'
                 );
